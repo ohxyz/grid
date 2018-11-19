@@ -1,0 +1,63 @@
+body {
+
+    padding: 16px;
+}
+
+.grid {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #cccccc;
+
+    &__header {
+
+        width: 100%;
+        display: flex;
+        border-bottom: 1px solid #cccccc;
+
+        &-cell {
+
+            flex-grow: 1;
+            flex-basis: 0;
+            padding: 4px 8px;
+            font-weight: bold;
+            text-align: center;
+            border-right: 1px solid #cccccc;
+
+            &:last-child {
+
+                border-right: 0;
+            }
+        }
+
+    }
+
+    &__body {
+
+    }
+
+    &__row {
+
+        display: flex;
+        border-bottom: 1px solid #cccccc;
+        
+        &-cell {
+
+            flex-grow: 1;
+            flex-basis: 0;
+            padding: 4px 8px;
+            border-right: 1px solid #cccccc;
+
+            &:last-child {
+
+                border-right: 0;
+            }
+        }
+
+        &:last-child {
+
+            border: 0;
+        }
+    }
+}

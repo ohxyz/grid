@@ -15,15 +15,27 @@ module.exports = {
         port: 5000,
     },
     module: {
-        rules: [ {
-            test: /\.js[x]{0,1}$/,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: [ 'react', 'env' ]
+        rules: [
+        
+            {
+                test: /\.js[x]{0,1}$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [ 'react', 'env' ]
+                    }
                 }
+            },
+
+            {
+                test: /\.less$/,
+                use: [ 
+                    { loader: "style-loader" },
+                    { loader: "css-loader" },
+                    { loader: "less-loader" }
+                ]
             }
-        } ]
+        ]
     }
 };

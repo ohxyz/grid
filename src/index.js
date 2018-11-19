@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid } from './grid';
 
+require( '../less/grid.less' );
+
 const persons = [
 
     { height:  175,       name:    'Andrea'                    },
@@ -15,19 +17,14 @@ const persons = [
     { name:   'Benson',   sex:     'Male'                      }
 ];
 
-const config = {
+const columnRefs = [
 
-    columns: {
-
-        height: { type: 'text' }
-        name: { type: 'text' }
-        sex: { type: 'text' }
-    }
-
-    order: [ 'name', 'sex', 'height' ]
-};
+    { prop: 'name', name: 'Name' },
+    { prop: 'sex', name: 'Gender' },
+    { prop: 'height', name: 'Height(cm)', type: 'text' },
+];
 
 ReactDOM.render(
-    <Grid items={ persons } meta={ config } />,
+    <Grid items={ persons } cols={ columnRefs } />,
     document.getElementById('container')
 );
