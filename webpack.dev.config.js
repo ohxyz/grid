@@ -1,16 +1,18 @@
 const path = require( 'path' );
 
+const STATIC_CONTENT_PATH = path.join( __dirname, 'test/public' )
+
 module.exports = {
 
     mode: 'development',
-    entry: './src/index.js',
+    entry: './test/src/index.js',
     output: {
-        path: path.join( __dirname, 'public' ),
+        path: STATIC_CONTENT_PATH,
         filename: 'bundle.js'
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: path.join( __dirname, 'public' ),
+        contentBase: STATIC_CONTENT_PATH,
         compress: true,
         port: 5000,
     },

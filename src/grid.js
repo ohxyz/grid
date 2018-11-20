@@ -7,11 +7,37 @@ class Grid extends React.Component {
     constructor( props ) {
 
         super( props );
+
+        this.sortOrder = 1;
+        this.state = {
+
+            items: this.props.items.map( item => Object.assign( {}, item ) )
+        };
     }
 
     makeClassName( text ) {
 
         return this.props.classNamePrefix + '__' + text;
+    }
+
+    handleHeaderCellClick( propName ) {
+
+        let items = this.state.items.map( item => Object.assign( {}, item ) );
+
+        items.sort( ( item1, item2 ) => { 
+
+            let valueOfItem1 = item1[ propName ] === undefined ? '' : item1[ propName ].toString();
+            let valueOfItem2 = item2[ propName ] === undefined ? '' : item2[ propName ].toString();
+
+            return valueOfItem1.localeCompare( valueOfItem2 ) * this.sortOrder;
+
+        } );
+
+        this.sortOrder = this.sortOrder * -1;
+        this.setState( { 
+
+            items: items
+        } );
     }
 
     renderCell( content ) {
@@ -47,6 +73,7 @@ class Grid extends React.Component {
 
                         return  <span key={ index } 
                                       className={ this.makeClassName( 'header-cell' ) }
+                                      onClick={ () => this.handleHeaderCellClick( column.prop ) }
                                 >
                                     { column.name }
                                 </span>
@@ -59,7 +86,7 @@ class Grid extends React.Component {
 
         return  <div className={ this.makeClassName( 'body' ) }>
                 {
-                    this.props.items.map( ( item, index ) => this.renderRow( item, index ) )
+                    this.state.items.map( ( item, index ) => this.renderRow( item, index ) )
                 }
                 </div>
     }

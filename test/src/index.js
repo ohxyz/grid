@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Grid } from './grid';
+import { Grid } from '../../src/grid';
 
-require( '../less/grid.less' );
+require( '../../less/grid.less' );
 
 const persons = [
 
@@ -25,6 +25,8 @@ const columnRefs = [
 ];
 
 ReactDOM.render(
-    <Grid items={ persons } cols={ columnRefs } />,
+    <Grid items={ persons } 
+          cols={ columnRefs } 
+    />,
     document.getElementById('container')
 );
