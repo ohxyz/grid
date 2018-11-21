@@ -9,6 +9,7 @@ class Grid extends React.Component {
         super( props );
 
         this.sortOrder = 1;
+        this.sortProp = '';
         this.state = {
 
             items: this.props.items.map( item => Object.assign( {}, item ) ),
@@ -16,7 +17,7 @@ class Grid extends React.Component {
         };
     }
 
-    makeClassName( text ) {
+    makeClassNameByPrefix( text ) {
 
         return this.props.classNamePrefix + '__' + text;
     }
@@ -40,6 +41,8 @@ class Grid extends React.Component {
         } );
 
         let sortClassName = '';
+
+        this.sortProp = propName;
 
         switch( this.sortOrder ) {
 
@@ -77,11 +80,11 @@ class Grid extends React.Component {
 
     renderRow( object, index ) {
 
-        return  <div className={ this.makeClassName( 'row' ) } key={ index } >
+        return  <div className={ this.makeClassNameByPrefix( 'row' ) } key={ index } >
                 {
                     this.props.cols.map( col =>
 
-                        <span className={ this.makeClassName( 'row-cell' ) } key={ col.prop }>
+                        <span className={ this.makeClassNameByPrefix( 'row-cell' ) } key={ col.prop }>
                         { 
                             this.renderCell( object[ col.prop ] ) 
                         }
@@ -92,17 +95,24 @@ class Grid extends React.Component {
     }
 
     renderHeader() {
+        
+        let classNameOfHeader = this.makeClassNameByPrefix( 'header' );
+        let classNameOfCell = this.makeClassNameByPrefix( 'header-cell' );
+        let classNameOfCellOnSort = `${classNameOfCell} ${this.state.sortClassName}`;
 
         let columnDefs = this.props.cols;
 
-        return  <div className={ this.makeClassName( 'header' ) }>
+        return  <div className={ classNameOfHeader }>
                 {
                     columnDefs.map( ( colDef, index ) => {
 
                         let column = new Column( colDef );
+                        let className = this.sortProp === colDef.prop 
+                                      ? classNameOfCellOnSort
+                                      : classNameOfCell;
 
                         return  <span key={ index } 
-                                      className={ this.makeClassName( 'header-cell' ) }
+                                      className={ className }
                                       onClick={ () => this.handleHeaderCellClick( column.prop ) }
                                 >
                                     { column.name }
@@ -114,7 +124,7 @@ class Grid extends React.Component {
 
     renderBody() {
 
-        return  <div className={ this.makeClassName( 'body' ) }>
+        return  <div className={ this.makeClassNameByPrefix( 'body' ) }>
                 {
                     this.state.items.map( ( item, index ) => this.renderRow( item, index ) )
                 }
@@ -123,14 +133,12 @@ class Grid extends React.Component {
 
     renderFooter() {
 
-        return  <div className={ this.makeClassName( 'footer' ) }></div>
+        return  <div className={ this.makeClassNameByPrefix( 'footer' ) }></div>
     }
 
     render() {
 
-        let className = `${this.props.classNamePrefix} ${this.state.sortClassName}`.trim();
-
-        return  <div className={ className } >
+        return  <div className={ this.props.classNamePrefix } >
                     { this.renderHeader() }
                     { this.renderBody() }
                     { this.renderFooter() }

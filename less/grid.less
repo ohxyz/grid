@@ -85,27 +85,14 @@ body {
             border: 0;
         }
     }
-}
 
-.grid--sort-asc {
+    &--sort-asc:after {
 
-    .grid {
+        border-bottom-color: #333333;
+    }
 
-        &__header-cell:after {
+    &--sort-desc:before {
 
-            border-bottom-color: #333333;
-        }
+        border-top-color: #333333;
     }
 }
-
-.grid--sort-desc {
-
-    .grid {
-
-        &__header-cell:before {
-
-            border-top-color: #333333;
-        }
-    }
-}
-
