@@ -1,5 +1,5 @@
 {
-  "name": "grid",
+  "name": "@ohxyz/grid",
   "version": "1.0.0",
   "description": "Grid in React",
   "main": "index.js",

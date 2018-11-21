@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid } from '../../src/grid';
 
-// require( '../../less/grid.less' );
-
 var persons = [
 
     { height:  175,       name:    'Andrea'                    },
