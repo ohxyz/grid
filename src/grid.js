@@ -75,7 +75,7 @@ class Grid extends React.Component {
                 let v1 = item1[ propName ] === undefined ? '' : item1[ propName ].toString();
                 let v2 = item2[ propName ] === undefined ? '' : item2[ propName ].toString();
 
-                return v1.localeCompare( v2 ) * this.sortSettings.order;
+                return ( v1 < v2 ? -1 : ( v1 > v2 ? 1 : 0 ) ) * this.sortSettings.order;
             } );
         }
 
@@ -83,7 +83,6 @@ class Grid extends React.Component {
 
             items: items,
             sortClassName: sortClassName
-
         } );
     }
 

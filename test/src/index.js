@@ -4,7 +4,7 @@ import { Grid } from '../../src/grid';
 
 require( '../../less/grid.less' );
 
-const persons = [
+var persons = [
 
     { height:  175,       name:    'Andrea'                    },
     { height:  167,       name:    'Anthony',  sex:     'Male' },
@@ -17,7 +17,9 @@ const persons = [
     { name:   'Benson',   sex:     'Male'                      }
 ];
 
-const columnRefs = [
+// var persons = require( './mock10000.json' );
+
+var columnRefs = [
 
     { prop: 'name', name: 'Name' },
     { prop: 'sex', name: 'Gender' },
