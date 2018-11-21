@@ -11,7 +11,8 @@ class Grid extends React.Component {
         this.sortOrder = 1;
         this.state = {
 
-            items: this.props.items.map( item => Object.assign( {}, item ) )
+            items: this.props.items.map( item => Object.assign( {}, item ) ),
+            sortClassName: ''
         };
     }
 
@@ -21,6 +22,11 @@ class Grid extends React.Component {
     }
 
     handleHeaderCellClick( propName ) {
+
+        if ( this.props.shouldEnableSort === false ) {
+
+            return;
+        }
 
         let items = this.state.items.map( item => Object.assign( {}, item ) );
 
@@ -33,10 +39,34 @@ class Grid extends React.Component {
 
         } );
 
-        this.sortOrder = this.sortOrder * -1;
+        let sortClassName = '';
+
+        switch( this.sortOrder ) {
+
+            case 0:
+                sortClassName = '';
+                this.sortOrder = 1;
+                break;
+
+            case 1:
+                sortClassName = 'grid--sort-asc';
+                this.sortOrder = -1;
+                break;
+
+            case -1:
+                sortClassName = 'grid--sort-desc';
+                this.sortOrder = 0;
+                break;
+
+            default:
+                break;
+        }
+
         this.setState( { 
 
-            items: items
+            items: items,
+            sortClassName: sortClassName
+
         } );
     }
 
@@ -98,7 +128,9 @@ class Grid extends React.Component {
 
     render() {
 
-        return  <div className={ this.props.classNamePrefix } >
+        let className = `${this.props.classNamePrefix} ${this.state.sortClassName}`.trim();
+
+        return  <div className={ className } >
                     { this.renderHeader() }
                     { this.renderBody() }
                     { this.renderFooter() }
@@ -110,14 +142,16 @@ Grid.defaultProps = {
 
     items: [],
     cols: [],
-    classNamePrefix: 'grid'
+    classNamePrefix: 'grid',
+    shouldEnableSort: true
 }
 
 Grid.propTypes = {
 
     items: PropTypes.array,
     cols: PropTypes.array,
-    classNamePrefix: PropTypes.string
+    classNamePrefix: PropTypes.string,
+    shouldEnableSort: PropTypes.bool
 }
 
 export {
