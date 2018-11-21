@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Grid } from '../../src/grid';
 
-require( '../../less/grid.less' );
+// require( '../../less/grid.less' );
 
 var persons = [
 
@@ -27,7 +27,7 @@ var columnRefs = [
 ];
 
 ReactDOM.render(
-    <Grid classNamePrefix="grid1"
+    <Grid classNamePrefix="grid"
           items={ persons } 
           cols={ columnRefs } 
     />,

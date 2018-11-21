@@ -1,11 +1,12 @@
 {
   "name": "grid",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Grid in React",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.dev.config.js",
-    "dev": "webpack-dev-server --config webpack.dev.config.js --open"
+    "dev": "webpack-dev-server --config webpack.dev.config.js --open",
+    "less": "lessc ./less/grid.less ./style/default.css"
   },
   "repository": {
     "type": "git",
