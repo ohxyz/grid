@@ -25,7 +25,8 @@ const columnRefs = [
 ];
 
 ReactDOM.render(
-    <Grid items={ persons } 
+    <Grid classNamePrefix="grid1"
+          items={ persons } 
           cols={ columnRefs } 
     />,
     document.getElementById('container')

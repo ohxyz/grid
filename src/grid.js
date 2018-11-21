@@ -8,8 +8,12 @@ class Grid extends React.Component {
 
         super( props );
 
-        this.sortOrder = 1;
-        this.sortProp = '';
+        this.sortSettings = {
+
+            prop: '',
+            order: 0
+        };
+
         this.state = {
 
             items: this.props.items.map( item => Object.assign( {}, item ) ),
@@ -29,40 +33,50 @@ class Grid extends React.Component {
             return;
         }
 
-        let items = this.state.items.map( item => Object.assign( {}, item ) );
-
-        items.sort( ( item1, item2 ) => { 
-
-            let valueOfItem1 = item1[ propName ] === undefined ? '' : item1[ propName ].toString();
-            let valueOfItem2 = item2[ propName ] === undefined ? '' : item2[ propName ].toString();
-
-            return valueOfItem1.localeCompare( valueOfItem2 ) * this.sortOrder;
-
-        } );
-
         let sortClassName = '';
 
-        this.sortProp = propName;
+        if ( this.sortSettings.prop === propName ) {
 
-        switch( this.sortOrder ) {
+            switch( this.sortSettings.order ) {
 
-            case 0:
-                sortClassName = '';
-                this.sortOrder = 1;
-                break;
+                case 0:
+                    this.sortSettings.order = 1;
+                    sortClassName = this.props.classNamePrefix + '--sort-asc';
+                    break;
 
-            case 1:
-                sortClassName = 'grid--sort-asc';
-                this.sortOrder = -1;
-                break;
+                case 1:
+                    this.sortSettings.order = -1;
+                    sortClassName = this.props.classNamePrefix + '--sort-desc';
+                    break;
 
-            case -1:
-                sortClassName = 'grid--sort-desc';
-                this.sortOrder = 0;
-                break;
+                case -1:
+                    this.sortSettings.order = 0;
+                    sortClassName = '';
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
+        }
+        else {
+
+            this.sortSettings.order = 1;
+            sortClassName = this.props.classNamePrefix + '--sort-asc';
+        }
+
+        this.sortSettings.prop = propName;
+
+        let items = this.props.items.map( item => Object.assign( {}, item ) );
+
+        if ( this.sortSettings.order !== 0 ) {
+
+            items.sort( ( item1, item2 ) => { 
+
+                let v1 = item1[ propName ] === undefined ? '' : item1[ propName ].toString();
+                let v2 = item2[ propName ] === undefined ? '' : item2[ propName ].toString();
+
+                return v1.localeCompare( v2 ) * this.sortSettings.order;
+            } );
         }
 
         this.setState( { 
@@ -84,7 +98,9 @@ class Grid extends React.Component {
                 {
                     this.props.cols.map( col =>
 
-                        <span className={ this.makeClassNameByPrefix( 'row-cell' ) } key={ col.prop }>
+                        <span className={ this.makeClassNameByPrefix( 'row-cell' ) } 
+                              key={ col.prop }
+                        >
                         { 
                             this.renderCell( object[ col.prop ] ) 
                         }
@@ -107,7 +123,7 @@ class Grid extends React.Component {
                     columnDefs.map( ( colDef, index ) => {
 
                         let column = new Column( colDef );
-                        let className = this.sortProp === colDef.prop 
+                        let className = this.sortSettings.prop === colDef.prop 
                                       ? classNameOfCellOnSort
                                       : classNameOfCell;
 
