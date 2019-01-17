@@ -1,4 +1,4 @@
-const Grid = require( './src/grid.js' ).Grid;
+const Grid = require( './lib/grid.js' ).Grid;
 
 module.exports = {
 
