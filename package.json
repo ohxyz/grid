@@ -1,7 +1,7 @@
 {
   "name": "@ohxyz/grid",
-  "version": "1.0.2",
-  "description": "Grid in React",
+  "version": "1.0.3",
+  "description": "Display a table or a list. Built in React.",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.config.js --open",
