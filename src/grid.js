@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Column } from './column';
+import { Column } from './column.js';
 
 class Grid extends React.Component {
 
@@ -86,7 +86,7 @@ class Grid extends React.Component {
         } );
     }
 
-    renderCell( content ) {
+    renderCell( content, title ) {
 
         return content;
     }
@@ -101,7 +101,7 @@ class Grid extends React.Component {
                               key={ col.prop }
                         >
                         { 
-                            this.renderCell( object[ col.prop ] ) 
+                            this.renderCell( object[ col.prop ], col.name ) 
                         }
                         </span>
                     )
@@ -167,7 +167,7 @@ Grid.defaultProps = {
     cols: [],
     classNamePrefix: 'grid',
     shouldEnableSort: true
-}
+};
 
 Grid.propTypes = {
 
@@ -175,7 +175,7 @@ Grid.propTypes = {
     cols: PropTypes.array,
     classNamePrefix: PropTypes.string,
     shouldEnableSort: PropTypes.bool
-}
+};
 
 export {
 
