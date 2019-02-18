@@ -17,7 +17,7 @@ var persons = [
 
 // var persons = require( './mock10000.json' );
 
-var columnRefs = [
+var colDefs = [
 
     { prop: 'name', name: 'Name' },
     { prop: 'sex', name: 'Gender' },
@@ -27,7 +27,7 @@ var columnRefs = [
 ReactDOM.render(
     <Grid classNamePrefix="grid"
           items={ persons } 
-          cols={ columnRefs } 
+          cols={ colDefs }
     />,
     document.getElementById('container')
 );

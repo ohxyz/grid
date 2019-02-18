@@ -86,14 +86,29 @@ class Grid extends React.Component {
         } );
     }
 
+    handleRowClick( object ) {
+
+        this.props.onRowClick( object );
+    }
+
+    handleRowCellClick( content ) {
+
+        this.props.onRowCellClick( content );
+    }
+
     renderCell( content, title ) {
 
-        return content;
+        return  <span className={ this.makeClassNameByPrefix( 'cell-content' ) } >
+                    { content }
+                </span>
     }
 
     renderRow( object, index ) {
 
-        return  <div className={ this.makeClassNameByPrefix( 'row' ) } key={ index } >
+        return  <div className={ this.makeClassNameByPrefix( 'row' ) } 
+                     key={ index } 
+                     onClick={ () => this.handleRowClick( object ) } 
+                >
                 {
                     this.props.cols.map( col =>
 
@@ -130,7 +145,11 @@ class Grid extends React.Component {
                                       className={ className }
                                       onClick={ () => this.handleHeaderCellClick( column.prop ) }
                                 >
-                                    { column.name }
+                                    <span
+                                        className={ this.makeClassNameByPrefix( 'cell-content' ) }
+                                    >
+                                         { column.name }
+                                    </span>
                                 </span>
                     } )
                 }
@@ -166,7 +185,8 @@ Grid.defaultProps = {
     items: [],
     cols: [],
     classNamePrefix: 'grid',
-    shouldEnableSort: true
+    shouldEnableSort: true,
+    onRowClick: () => {}
 };
 
 Grid.propTypes = {
@@ -174,7 +194,8 @@ Grid.propTypes = {
     items: PropTypes.array,
     cols: PropTypes.array,
     classNamePrefix: PropTypes.string,
-    shouldEnableSort: PropTypes.bool
+    shouldEnableSort: PropTypes.bool,
+    onRowClick: PropTypes.func
 };
 
 export {

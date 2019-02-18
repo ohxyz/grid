@@ -1,6 +1,6 @@
 {
   "name": "@ohxyz/grid",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Display a table or a list. Built in React.",
   "main": "index.js",
   "scripts": {
