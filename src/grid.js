@@ -70,6 +70,7 @@ class Grid extends React.Component {
 
         if ( this.sortSettings.order !== 0 ) {
 
+            console.time( 'Sort' );
             items.sort( ( item1, item2 ) => { 
 
                 let v1 = item1[ propName ] === undefined ? '' : item1[ propName ].toString();
@@ -77,6 +78,7 @@ class Grid extends React.Component {
 
                 return ( v1 < v2 ? -1 : ( v1 > v2 ? 1 : 0 ) ) * this.sortSettings.order;
             } );
+            console.timeEnd( 'Sort' );
         }
 
         this.setState( { 
